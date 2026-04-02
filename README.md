@@ -15,6 +15,13 @@ If you clone this repo fresh, initialize submodules with:
 git submodule update --init --recursive
 ```
 
+Submodules are configured to track `main`, but they are still pinned to exact commits in this repo (Git submodule behavior).
+To move both to the newest remote commits:
+
+```bash
+make update-submodules
+```
+
 ## Development stack (Docker)
 
 The development stack is defined in `docker-compose.yml` and uses:

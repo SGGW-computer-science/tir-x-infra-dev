@@ -1,6 +1,8 @@
 [submodule "tir-x-backend"]
 	path = tir-x-backend
 	url = https://github.com/SGGW-computer-science/tir-x-backend.git
+	branch = main
 [submodule "tir-x-frontend"]
 	path = tir-x-frontend
 	url = https://github.com/SGGW-computer-science/tir-x-frontend.git
+	branch = main
