@@ -6,10 +6,11 @@ services:
     working_dir: /app
     command: >
       sh -c "dotnet restore tir-x-backend.slnx &&
-             dotnet watch run --project src/TirX.API --urls http://0.0.0.0:5000"
+             dotnet watch --non-interactive run --project src/TirX.API --urls http://0.0.0.0:5000"
     environment:
       ASPNETCORE_ENVIRONMENT: Development
       DOTNET_USE_POLLING_FILE_WATCHER: "1"
+      DOTNET_WATCH_RESTART_ON_RUDE_EDIT: "true"
       ConnectionStrings__Default: Host=db;Port=5432;Database=postgres;Username=postgres;Password=admin
     volumes:
       - ./tir-x-backend:/app
