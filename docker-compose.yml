@@ -12,6 +12,7 @@ services:
       DOTNET_USE_POLLING_FILE_WATCHER: "1"
       DOTNET_WATCH_RESTART_ON_RUDE_EDIT: "true"
       ConnectionStrings__Default: Host=db;Port=5432;Database=postgres;Username=postgres;Password=admin
+      ConnectionStrings__Redis: redis:6379
     volumes:
       - ./tir-x-backend:/app
       - nuget-packages:/root/.nuget/packages
@@ -19,6 +20,7 @@ services:
       - "5000:5000"
     depends_on:
       - db
+      - redis
 
   frontend:
     build:
@@ -40,7 +42,7 @@ services:
       - backend
 
   db:
-    image: postgres:16-alpine
+    image: postgis/postgis:16-3.4
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: admin
@@ -50,7 +52,16 @@ services:
     ports:
       - "5432:5432"
 
+  redis:
+    image: redis:7-alpine
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - redis-data:/data
+    ports:
+      - "6379:6379"
+
 volumes:
   postgres-data:
+  redis-data:
   nuget-packages:
   frontend-node-modules:
