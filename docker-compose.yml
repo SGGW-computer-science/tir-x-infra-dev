@@ -13,6 +13,13 @@ services:
       DOTNET_WATCH_RESTART_ON_RUDE_EDIT: "true"
       ConnectionStrings__Default: Host=db;Port=5432;Database=postgres;Username=postgres;Password=admin
       ConnectionStrings__Redis: redis:6379
+      AvatarStorage__Endpoint: minio:9000
+      AvatarStorage__PublicEndpoint: http://localhost:9000
+      AvatarStorage__AccessKey: minioadmin
+      AvatarStorage__SecretKey: minioadmin
+      AvatarStorage__BucketName: tirx-avatars
+      AvatarStorage__UseSsl: "false"
+      AvatarStorage__PresignedUrlExpirationMinutes: "60"
     volumes:
       - ./tir-x-backend:/app
       - nuget-packages:/root/.nuget/packages
@@ -21,6 +28,7 @@ services:
     depends_on:
       - db
       - redis
+      - minio
 
   frontend:
     build:
@@ -60,8 +68,21 @@ services:
     ports:
       - "6379:6379"
 
+  minio:
+    image: minio/minio:latest
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    volumes:
+      - minio-data:/data
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+
 volumes:
   postgres-data:
   redis-data:
+  minio-data:
   nuget-packages:
   frontend-node-modules:
