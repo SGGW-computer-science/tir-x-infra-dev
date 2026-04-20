@@ -34,17 +34,54 @@ VALUES
 
 INSERT INTO fuel_prices (id, station_id, user_id, fuel_type_id, price, upvotes_count, downvotes_count, created_at)
 VALUES
-    (1, 1, 2, 1, 6.39, 4, 0, NOW()::timestamp - INTERVAL '2 days'),
-    (2, 1, 4, 2, 6.79, 3, 1, NOW()::timestamp - INTERVAL '1 day 12 hours'),
-    (3, 2, 2, 1, 6.45, 2, 0, NOW()::timestamp - INTERVAL '1 day'),
-    (4, 3, 4, 3, 7.05, 1, 0, NOW()::timestamp - INTERVAL '10 hours');
+    (1, 1, 2, 1, 6.39, 3, 1, NOW()::timestamp - INTERVAL '2 days'),
+    (2, 1, 4, 2, 6.79, 2, 2, NOW()::timestamp - INTERVAL '1 day 18 hours'),
+    (3, 1, 3, 3, 7.12, 1, 1, NOW()::timestamp - INTERVAL '1 day 10 hours'),
+    (4, 2, 2, 1, 6.45, 4, 0, NOW()::timestamp - INTERVAL '1 day'),
+    (5, 2, 4, 2, 6.88, 2, 1, NOW()::timestamp - INTERVAL '20 hours'),
+    (6, 2, 3, 3, 7.22, 1, 2, NOW()::timestamp - INTERVAL '16 hours'),
+    (7, 3, 4, 1, 6.49, 2, 1, NOW()::timestamp - INTERVAL '14 hours'),
+    (8, 3, 2, 2, 6.92, 3, 0, NOW()::timestamp - INTERVAL '12 hours'),
+    (9, 3, 4, 3, 7.05, 1, 1, NOW()::timestamp - INTERVAL '10 hours');
 
 INSERT INTO price_votes (id, price_id, user_id, vote_value, created_at)
 VALUES
-    (1, 1, 4, 1, NOW()::timestamp - INTERVAL '40 hours'),
-    (2, 1, 3, 1, NOW()::timestamp - INTERVAL '38 hours'),
-    (3, 2, 2, -1, NOW()::timestamp - INTERVAL '30 hours'),
-    (4, 3, 1, 1, NOW()::timestamp - INTERVAL '20 hours');
+    (1, 1, 1, 1, NOW()::timestamp - INTERVAL '46 hours'),
+    (2, 1, 3, 1, NOW()::timestamp - INTERVAL '45 hours'),
+    (3, 1, 4, 1, NOW()::timestamp - INTERVAL '44 hours'),
+    (4, 1, 2, -1, NOW()::timestamp - INTERVAL '43 hours'),
+
+    (5, 2, 1, 1, NOW()::timestamp - INTERVAL '42 hours'),
+    (6, 2, 3, 1, NOW()::timestamp - INTERVAL '41 hours'),
+    (7, 2, 4, -1, NOW()::timestamp - INTERVAL '40 hours'),
+    (8, 2, 2, -1, NOW()::timestamp - INTERVAL '39 hours'),
+
+    (9, 3, 2, 1, NOW()::timestamp - INTERVAL '38 hours'),
+    (10, 3, 1, -1, NOW()::timestamp - INTERVAL '37 hours'),
+
+    (11, 4, 1, 1, NOW()::timestamp - INTERVAL '36 hours'),
+    (12, 4, 2, 1, NOW()::timestamp - INTERVAL '35 hours'),
+    (13, 4, 3, 1, NOW()::timestamp - INTERVAL '34 hours'),
+    (14, 4, 4, 1, NOW()::timestamp - INTERVAL '33 hours'),
+
+    (15, 5, 1, 1, NOW()::timestamp - INTERVAL '32 hours'),
+    (16, 5, 4, 1, NOW()::timestamp - INTERVAL '31 hours'),
+    (17, 5, 3, -1, NOW()::timestamp - INTERVAL '30 hours'),
+
+    (18, 6, 1, 1, NOW()::timestamp - INTERVAL '29 hours'),
+    (19, 6, 2, -1, NOW()::timestamp - INTERVAL '28 hours'),
+    (20, 6, 4, -1, NOW()::timestamp - INTERVAL '27 hours'),
+
+    (21, 7, 2, 1, NOW()::timestamp - INTERVAL '26 hours'),
+    (22, 7, 1, 1, NOW()::timestamp - INTERVAL '25 hours'),
+    (23, 7, 3, -1, NOW()::timestamp - INTERVAL '24 hours'),
+
+    (24, 8, 1, 1, NOW()::timestamp - INTERVAL '23 hours'),
+    (25, 8, 2, 1, NOW()::timestamp - INTERVAL '22 hours'),
+    (26, 8, 4, 1, NOW()::timestamp - INTERVAL '21 hours'),
+
+    (27, 9, 3, 1, NOW()::timestamp - INTERVAL '20 hours'),
+    (28, 9, 1, -1, NOW()::timestamp - INTERVAL '19 hours');
 
 INSERT INTO fuel_price_reports (id, fuel_price_id, user_id, reason, status, created_at, moderated_at, moderated_by_user_id)
 VALUES
