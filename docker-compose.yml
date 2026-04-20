@@ -20,15 +20,23 @@ services:
       AvatarStorage__BucketName: tirx-avatars
       AvatarStorage__UseSsl: "false"
       AvatarStorage__PresignedUrlExpirationMinutes: "60"
+      Smtp__Host: mailhog
+      Smtp__Port: 1025
+      Smtp__EnableSsl: "false"
     volumes:
       - ./tir-x-backend:/app
       - nuget-packages:/root/.nuget/packages
     ports:
       - "5000:5000"
     depends_on:
-      - db
-      - redis
-      - minio
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_started
+      minio:
+        condition: service_started
+      mailhog:
+        condition: service_started
 
   frontend:
     build:
@@ -55,6 +63,11 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: admin
       POSTGRES_DB: postgres
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
     volumes:
       - postgres-data:/var/lib/postgresql/data
     ports:
@@ -79,6 +92,12 @@ services:
     ports:
       - "9000:9000"
       - "9001:9001"
+
+  mailhog:
+    image: mailhog/mailhog:v1.0.1
+    ports:
+      - "1025:1025"
+      - "8025:8025"
 
 volumes:
   postgres-data:
