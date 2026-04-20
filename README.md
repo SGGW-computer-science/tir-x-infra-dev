@@ -45,6 +45,30 @@ docker compose up --build
 docker compose down
 ```
 
+## Seed test data
+
+Skrypt seedujący jest dopasowany do aktualnego schematu bazy i znajduje się w `scripts/seed_test_data.sql`.
+
+1. Uruchom stack:
+
+```bash
+docker compose up -d
+```
+
+2. Zaseeduj bazę:
+
+```bash
+./scripts/seed-db.sh
+```
+
+alternatywnie:
+
+```bash
+make seed-db
+```
+
+Uwaga: seed resetuje dane w tabelach domenowych (`TRUNCATE ... RESTART IDENTITY CASCADE`) i wstawia zestaw testowy od zera.
+
 ### Services
 
 - Frontend: http://localhost:5173
